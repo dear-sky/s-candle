@@ -22,20 +22,20 @@
   touch-action: manipulation;
 }
 
-/* 2. 開始日・終了日の日付テキストの見た目調整（スマホ・PC共通） */
+/* 2. 開始日・終了日の日付テキスト（基本設定: PC用） */
 #input-start-date,
 #input-end-date {
-  font-size: 13px !important;    /* パソコン等でのベースサイズ */
-  text-align: center;            /* 日付を中央揃えにしてスッキリ表示 */
-  padding: 8px 4px !important;   /* 内側の余白を詰めて圧迫感を減らす */
+  font-size: 15px !important;    /* PC・タブレットで読みやすい標準サイズ */
+  text-align: center;            /* 文字を中央揃えにしてスッキリ表示 */
+  padding: 8px 6px !important;
 }
 
-/* スマホ（iOS等）で16px指定を維持しつつ文字だけ小さくレンダリングさせる強力な指定 */
-@supports (-webkit-touch-callout: none) {
+/* 3. スマホ画面（幅480px以下）の時だけ小さく調整 */
+@media screen and (max-width: 480px) {
   #input-start-date,
   #input-end-date {
-    font-size: 13px !important;
-    -webkit-text-size-adjust: 100%;
+    font-size: 13px !important;  /* スマホでのみ13pxに縮小 */
+    padding: 8px 2px !important; /* スマホで枠内に綺麗に収まるよう微調整 */
   }
 }
 
