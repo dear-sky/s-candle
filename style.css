@@ -143,21 +143,19 @@ body {
   margin-bottom: 16px;
 }
 
-/* 日付入力グループ（崩れ・重なり防止修正） */
+/* 日付入力グループ */
 .sim-date-group {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   padding-bottom: 12px;
   border-bottom: 1px solid #bae6fd;
-  width: 100%;
 }
 
 .sim-date-label {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
-  min-width: 0; /* 枠のハミ出し・重なりを確実に防ぐ */
 }
 
 .sim-date-label label {
@@ -166,21 +164,20 @@ body {
   font-weight: 700;
 }
 
-.sim-date-label input {
+.sim-date-label input[type="date"] {
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #7dd3fc;
   color: #1a5e8b;
-  padding: 8px 4px;
+  padding: 8px 6px;
   border-radius: 8px;
-  font-size: 16px !important; /* スマホChrome自動ズーム防止 */
+  font-size: 12.5px;
   font-weight: 600;
   font-family: inherit;
   outline: none;
-  text-align: center;
 }
 
-.sim-date-label input:focus {
+.sim-date-label input[type="date"]:focus {
   border-color: #0284c7;
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
 }
@@ -210,7 +207,7 @@ body {
   color: #0f172a;
   padding: 8px 10px;
   border-radius: 8px;
-  font-size: 16px !important; /* スマホChrome自動ズーム防止 */
+  font-size: 15px;
   font-weight: bold;
   font-family: inherit;
   outline: none;
@@ -313,74 +310,7 @@ body {
   line-height: 1.4;
 }
 
-/* 入力欄（フォーム）共通スタイル：ここから .flatpickr-input を除外しました */
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-  border: 1.5px solid #7dd3fc;
-  border-radius: 8px;
-  padding: 8px 4px;
-  background-color: #ffffff;
-  color: #333333;
-  outline: none;
-  box-sizing: border-box;
-  width: 100%;
-  font-size: 16px !important; /* 入力時のスマホ自動ズーム防止 */
-}
-
-input:focus {
-  border-color: #0284c7;
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
-}
-
-/* ドット絵アイコンの配置・途切れ防止設定 */
-.pixel-icon {
-  width: 20px !important;
-  height: 20px !important;
-  object-fit: contain !important;
-  
-  image-rendering: pixelated !important;
-  image-rendering: -moz-crisp-edges !important;
-  image-rendering: crisp-edges !important;
-  -ms-interpolation-mode: nearest-neighbor !important;
-  
-  display: inline-block !important;
-  vertical-align: middle !important;
-  margin: 0 2px !important;
-}
-
-/* スマホ画面（幅600px以下）のときだけの特別ルール */
-@media (max-width: 600px) {
-  body {
-    padding: 10px;
-    word-break: break-word;
-  }
-}
-
-/* ==========================================
-   カレンダー（Flatpickr）表示サイズの最適化
-   ========================================== */
-.flatpickr-calendar,
-.flatpickr-calendar * {
-  box-sizing: border-box !important;
-}
-
-/* カレンダー本体の大きさ固定 */
-.flatpickr-calendar {
-  width: 307.875px !important;
-  font-size: 14px !important;
-}
-
-/* 各日付マスのスタイル・文字サイズ */
-.flatpickr-day {
-  max-width: 39px !important;
-  height: 39px !important;
-  line-height: 39px !important;
-  font-size: 14px !important;
-}
-
+/* カレンダー（Flatpickr）関連 */
 .flatpickr-day.selected, 
 .flatpickr-day.selected:hover {
   background: #0284c7 !important;
@@ -395,19 +325,37 @@ input:focus {
   background: #e0f2fe !important;
 }
 
-/* カレンダー上部ヘッダー（月・曜日） */
-.flatpickr-current-month,
-.flatpickr-current-month .flatpickr-monthDropdown-months,
-.flatpickr-current-month input.cur-year,
-span.flatpickr-weekday {
-  font-size: 13.5px !important;
-  font-weight: 600 !important;
+input[type="date"],
+.flatpickr-input {
+  border: 1.5px solid #7dd3fc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background-color: #ffffff;
+  color: #333333;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-/* ==========================================
-   カレンダー強制スケール調整（最終手段）
-   ========================================== */
-.flatpickr-calendar {
-  transform: scale(0.85) !important; /* 全体を85%にキュッと縮小 */
-  transform-origin: top center !important; /* 位置がずれないよう上中央基準で縮小 */
+input[type="date"]:focus,
+.flatpickr-input:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+
+/* 修正ポイント：ドット絵アイコンの配置・途切れ防止設定 */
+.pixel-icon {
+  width: 20px !important;       /* 文字サイズに対してちょうど良い大きさに自動調整 */
+  height: 20px !important;
+  object-fit: contain !important;
+  
+  /* 画像補間を無効化（ドット絵のピクセル感を維持） */
+  image-rendering: pixelated !important;
+  image-rendering: -moz-crisp-edges !important;
+  image-rendering: crisp-edges !important;
+  -ms-interpolation-mode: nearest-neighbor !important;
+  
+  display: inline-block !important;
+  vertical-align: middle !important; /* マイナス値を解消し中央に配置 */
+  margin: 0 2px !important;
 }
