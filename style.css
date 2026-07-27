@@ -403,3 +403,11 @@ span.flatpickr-weekday {
   font-size: 13.5px !important;
   font-weight: 600 !important;
 }
+
+/* ==========================================
+   カレンダー強制スケール調整（最終手段）
+   ========================================== */
+.flatpickr-calendar {
+  transform: scale(0.85) !important; /* 全体を85%にキュッと縮小 */
+  transform-origin: top center !important; /* 位置がずれないよう上中央基準で縮小 */
+}
