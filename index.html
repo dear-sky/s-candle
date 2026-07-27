@@ -107,11 +107,11 @@
     <div class="sim-date-group">
       <div class="sim-date-label">
         <label for="input-start-date">開始日:</label>
-        <input type="date" id="input-start-date">
+        <input type="text" id="input-start-date" readonly>
       </div>
       <div class="sim-date-label">
         <label for="input-end-date">終了日:</label>
-        <input type="date" id="input-end-date">
+        <input type="text" id="input-end-date" readonly>
       </div>
     </div>
 
@@ -179,6 +179,8 @@ function replaceEmojisWithIcons(inputText) {
 // ==========================================
 // 2. メイン計算処理
 // ==========================================
+let calculateFunc = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   const startDateInput = document.getElementById("input-start-date");
   const endDateInput = document.getElementById("input-end-date");
@@ -190,17 +192,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusText = document.getElementById("status-text");
   const requiredDaysText = document.getElementById("required-days-text");
 
-  // デフォルト: 開始日のみ今日、終了日は未選択
-  const today = new Date();
-  if (startDateInput) startDateInput.value = formatDate(today);
-  if (endDateInput) endDateInput.value = "";
-
   function formatDate(d) {
     const yyyy = d.getFullYear();
     const mm = String(d.getMonth() + 1).padStart(2, '0');
     const dd = String(d.getDate()).padStart(2, '0');
     return `${yyyy}-${mm}-${dd}`;
   }
+
+  // デフォルト: 開始日のみ今日
+  const today = new Date();
+  if (startDateInput && !startDateInput.value) startDateInput.value = formatDate(today);
 
   function calculateResetCycles(startStr, endStr) {
     if (!startStr || !endStr) return 0;
@@ -219,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.floor((endUtc - startUtc) / msPerDay);
   }
 
-  function calculate() {
+  calculateFunc = function calculate() {
     const startVal = startDateInput ? startDateInput.value : "";
     const endVal = endDateInput ? endDateInput.value : "";
     const targetCost = targetInput ? (parseInt(targetInput.value, 10) || 0) : 0;
@@ -294,27 +295,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     }
-  }
+  };
 
   // イベントリスナー
   ["change", "input"].forEach(evt => {
-    if (startDateInput) startDateInput.addEventListener(evt, calculate);
-    if (endDateInput) endDateInput.addEventListener(evt, calculate);
-    if (targetInput) targetInput.addEventListener(evt, calculate);
-    if (passToggle) passToggle.addEventListener(evt, calculate);
+    if (startDateInput) startDateInput.addEventListener(evt, calculateFunc);
+    if (endDateInput) endDateInput.addEventListener(evt, calculateFunc);
+    if (targetInput) targetInput.addEventListener(evt, calculateFunc);
+    if (passToggle) passToggle.addEventListener(evt, calculateFunc);
   });
 
-  calculate();
-});
+  // 日付入力欄をFlatpickrに適用（スマホでのズーム防止設定）
+  flatpickr('#input-start-date, #input-end-date', {
+    locale: 'ja',
+    dateFormat: 'Y-m-d',
+    onChange: function() {
+      if (calculateFunc) calculateFunc();
+    }
+  });
 
-// 日付入力欄をFlatpickrに適用
-flatpickr('input[type="date"]', {
-  locale: 'ja',
-  dateFormat: 'Y-m-d',
-  disableMobile: "true",
-  onChange: function() {
-    if (typeof calculate === "function") calculate();
-  }
+  calculateFunc();
 });
 </script>
 </body>
