@@ -14,21 +14,29 @@
 
   <!-- レイアウトおよびドット絵アイコンのスタイル調整 -->
   <style>
-    /* 入力欄のズーム防止（16px保持）と文字サイズ調整 */
+/* 1. 入力欄全体のフォーカス時ズーム防止 */
 .sim-settings input[type="text"],
 .sim-settings input[type="number"],
 .flatpickr-input {
-  font-size: 16px !important; /* スマホの自動ズーム防止用に16pxを維持 */
+  font-size: 16px !important; /* iPhoneの自動ズーム防止基準 */
   touch-action: manipulation;
 }
 
-/* 開始日・終了日の入力文字だけを少し小さく見せる設定 */
+/* 2. 開始日・終了日の日付テキストの見た目調整（スマホ・PC共通） */
 #input-start-date,
 #input-end-date {
-  font-size: 13px !important; /* パソコン等での表示サイズ */
-  transform: scale(0.85);      /* 見た目を約85%に縮小 */
-  transform-origin: left center; /* 左寄せで縮小 */
-  width: 118%;                /* 縮小して生じた隙間を補正 */
+  font-size: 13px !important;    /* パソコン等でのベースサイズ */
+  text-align: center;            /* 日付を中央揃えにしてスッキリ表示 */
+  padding: 8px 4px !important;   /* 内側の余白を詰めて圧迫感を減らす */
+}
+
+/* スマホ（iOS等）で16px指定を維持しつつ文字だけ小さくレンダリングさせる強力な指定 */
+@supports (-webkit-touch-callout: none) {
+  #input-start-date,
+  #input-end-date {
+    font-size: 13px !important;
+    -webkit-text-size-adjust: 100%;
+  }
 }
 
     /* アイコンの途切れを解消するCSS調整 */
