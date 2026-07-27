@@ -11,21 +11,19 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 
-  <!-- レイアウトおよびドット絵アイコンのスタイル調整 -->
+  <!-- ドット絵アイコン・特別レイアウトのスタイル調整 -->
   <style>
-    /* 【修正】アイコンの途切れを解消するCSS調整 */
     .pixel-icon {
       width: auto;
-      height: 1.4em;             /* 文字の大きさに自然に合わせる */
+      height: 1.4em;
       max-height: 28px;
-      vertical-align: middle;     /* 上下に偏らず中央に配置して見切れを防止 */
+      vertical-align: middle;
       object-fit: contain;
-      image-rendering: pixelated; /* ドット絵のにじみを防ぐ設定 */
+      image-rendering: pixelated;
       display: inline-block;
-      margin-top: -2px;          /* テキストとの上下位置の微調整 */
+      margin-top: -2px;
     }
 
-    /* アイコンや数字が入るテキストエリアのハミ出し切り取り（overflow）を解除 */
     .sim-value {
       line-height: 1.5 !important;
       overflow: visible !important;
@@ -35,28 +33,27 @@
       gap: 4px;
     }
 
-    /* 既存の3つの枠と同じ幅で下段に全幅カードを配置する設定 */
     .sim-dashboard {
       display: flex;
       flex-direction: column;
-      gap: 10px; /* カード間の縦余白 */
+      gap: 10px;
       width: 100%;
     }
 
     .sim-dashboard-row {
       display: flex;
-      gap: 10px; /* カード間の横余白 */
+      gap: 10px;
       width: 100%;
     }
 
     .sim-dashboard-row .sim-stat-box {
-      flex: 1; /* 3つの枠を均等幅に分割 */
+      flex: 1;
       min-width: 0;
-      overflow: visible; /* 親枠での画像切れを防止 */
+      overflow: visible;
     }
 
     .sim-stat-box-full {
-      width: 100%; /* 上段3つの合計幅にピッタリ合わせる */
+      width: 100%;
       box-sizing: border-box;
     }
 
@@ -78,7 +75,6 @@
 
   <!-- 結果ダッシュボード -->
   <div class="sim-dashboard">
-    <!-- 上段：元からある3つの枠（横並び） -->
     <div class="sim-dashboard-row">
       <div class="sim-stat-box">
         <span class="sim-label">目標数</span>
@@ -94,7 +90,6 @@
       </div>
     </div>
 
-    <!-- 下段：追加した枠（上段3つの合計幅にぴったり合わせる） -->
     <div class="sim-stat-box sim-stat-box-full">
       <span class="sim-label"> デイリークエストを… </span>
       <span class="sim-value sim-value-sub" id="required-days-text">-</span>
@@ -105,13 +100,13 @@
   <div class="sim-settings">
     <!-- 日付指定フォーム -->
     <div class="sim-date-group">
-      <div class="sim-date-label">
+      <div class="sim-date-item">
         <label for="input-start-date">開始日:</label>
-        <input type="text" id="input-start-date" readonly>
+        <input type="text" id="input-start-date" readonly placeholder="日付を選択">
       </div>
-      <div class="sim-date-label">
+      <div class="sim-date-item">
         <label for="input-end-date">終了日:</label>
-        <input type="text" id="input-end-date" readonly>
+        <input type="text" id="input-end-date" readonly placeholder="日付を選択">
       </div>
     </div>
 
@@ -137,35 +132,26 @@
 
   <!-- 著作権表記 -->
   <footer class="footer-credit">
-  <!-- 制作者＆インスタリンク -->
-  <p class="author-info">
-    Created by 𓆩 Dear Sky kids 𓆪
-    <a href="https://www.instagram.com/dear.sky.kids/" target="_blank" rel="noopener noreferrer" class="insta-link">
-        <svg class="insta-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-        </svg>
+    <p class="author-info">
+      Created by 𓆩 Dear Sky kids 𓆪
+      <a href="https://www.instagram.com/dear.sky.kids/" target="_blank" rel="noopener noreferrer" class="insta-link">
+          <svg class="insta-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
       </a>
-  </p>
+    </p>
 
-  <!-- Sky公式 権利表記（必須） -->
-  <p class="copyright-notice">
-    ー 本ツールはファン制作による非公式ツールです。 ー<br>
-    『Sky 星を紡ぐ子どもたち』の著作権および商標権は thatgamecompany, Inc. に帰属します。
-  </p>
-</footer>
+    <p class="copyright-notice">
+      ー 本ツールはファン制作による非公式ツールです。 ー<br>
+      『Sky 星を紡ぐ子どもたち』の著作権および商標権は thatgamecompany, Inc. に帰属します。
+    </p>
+  </footer>
 
 </main>
 
-<!-- スクリプトの読み込みと処理 -->
 <script>
-// ==========================================
-// 1. アイコン画像置換の設定＆関数
-// ==========================================
 const IMG_BASE_PATH = 'ssc_img/';
-
-const iconMap = {
-  '🕯️': 'icon_candle.png'
-};
+const iconMap = { '🕯️': 'icon_candle.png' };
 
 function replaceEmojisWithIcons(inputText) {
   let result = String(inputText);
@@ -176,9 +162,6 @@ function replaceEmojisWithIcons(inputText) {
   return result;
 }
 
-// ==========================================
-// 2. メイン計算処理
-// ==========================================
 let calculateFunc = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -199,21 +182,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${yyyy}-${mm}-${dd}`;
   }
 
-  // デフォルト: 開始日のみ今日
   const today = new Date();
   if (startDateInput && !startDateInput.value) startDateInput.value = formatDate(today);
 
   function calculateResetCycles(startStr, endStr) {
     if (!startStr || !endStr) return 0;
-
     const s = startStr.split('-').map(Number);
     const e = endStr.split('-').map(Number);
-
     if (s.length !== 3 || e.length !== 3) return 0;
 
     const startUtc = Date.UTC(s[0], s[1] - 1, s[2]);
     const endUtc = Date.UTC(e[0], e[1] - 1, e[2]);
-
     if (startUtc > endUtc) return 0;
 
     const msPerDay = 1000 * 60 * 60 * 24;
@@ -226,12 +205,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetCost = targetInput ? (parseInt(targetInput.value, 10) || 0) : 0;
     const hasPass = passToggle ? passToggle.checked : false;
 
-    // ① 目標コスト
     if (targetCostText) {
       targetCostText.innerHTML = replaceEmojisWithIcons(`🕯️ ${targetCost}`);
     }
 
-    // 更新サイクルの回数（日）
     const totalDays = calculateResetCycles(startVal, endVal);
 
     if (totalDays <= 0) {
@@ -247,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // ② 獲得可能数
     const dailyRate = hasPass ? 6 : 5;
     const passBonus = hasPass ? 30 : 0;
     const maxPossible = (totalDays * dailyRate) + passBonus;
@@ -256,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
       possibleGetText.innerHTML = replaceEmojisWithIcons(`🕯️ ${maxPossible}`);
     }
 
-    // ③ 既存のステータス表示（＋差分 / －不足分）
     if (statusText) {
       if (targetCost <= 0) {
         statusText.textContent = "目標数を設定";
@@ -272,7 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // ④ 専用枠：《◯◯日中〇〇日で達成》
     if (requiredDaysText) {
       if (targetCost <= 0) {
         requiredDaysText.textContent = "-";
@@ -297,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // イベントリスナー
   ["change", "input"].forEach(evt => {
     if (startDateInput) startDateInput.addEventListener(evt, calculateFunc);
     if (endDateInput) endDateInput.addEventListener(evt, calculateFunc);
@@ -305,7 +278,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (passToggle) passToggle.addEventListener(evt, calculateFunc);
   });
 
-  // 日付入力欄をFlatpickrに適用（スマホでのズーム防止設定）
   flatpickr('#input-start-date, #input-end-date', {
     locale: 'ja',
     dateFormat: 'Y-m-d',
