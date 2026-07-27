@@ -164,20 +164,20 @@ body {
   font-weight: 700;
 }
 
-.sim-date-label input[type="date"] {
+.sim-date-label input {
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #7dd3fc;
   color: #1a5e8b;
   padding: 8px 6px;
   border-radius: 8px;
-  font-size: 12.5px;
+  font-size: 16px !important; /* 16px固定（自動ズーム防止） */
   font-weight: 600;
   font-family: inherit;
   outline: none;
 }
 
-.sim-date-label input[type="date"]:focus {
+.sim-date-label input:focus {
   border-color: #0284c7;
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
 }
@@ -207,7 +207,7 @@ body {
   color: #0f172a;
   padding: 8px 10px;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 16px !important; /* 16px固定（自動ズーム防止） */
   font-weight: bold;
   font-family: inherit;
   outline: none;
@@ -325,7 +325,11 @@ body {
   background: #e0f2fe !important;
 }
 
+input[type="text"],
+input[type="number"],
 input[type="date"],
+select,
+textarea,
 .flatpickr-input {
   border: 1.5px solid #7dd3fc;
   border-radius: 8px;
@@ -335,45 +339,35 @@ input[type="date"],
   outline: none;
   box-sizing: border-box;
   width: 100%;
+  font-size: 16px !important; /* スマホChrome等の強制自動ズーム防止（重要） */
 }
 
-input[type="date"]:focus,
+input:focus,
 .flatpickr-input:focus {
   border-color: #0284c7;
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
 }
 
-/* 修正ポイント：ドット絵アイコンの配置・途切れ防止設定 */
+/* ドット絵アイコンの配置・途切れ防止設定 */
 .pixel-icon {
-  width: 20px !important;       /* 文字サイズに対してちょうど良い大きさに自動調整 */
+  width: 20px !important;
   height: 20px !important;
   object-fit: contain !important;
   
-  /* 画像補間を無効化（ドット絵のピクセル感を維持） */
   image-rendering: pixelated !important;
   image-rendering: -moz-crisp-edges !important;
   image-rendering: crisp-edges !important;
   -ms-interpolation-mode: nearest-neighbor !important;
   
   display: inline-block !important;
-  vertical-align: middle !important; /* マイナス値を解消し中央に配置 */
+  vertical-align: middle !important;
   margin: 0 2px !important;
-}
-
-/* 例：入力フォームの文字サイズを16px以上にして自動ズームを防ぐ */
-input, select {
-    font-size: 16px; /* これを追加するだけでズームしなくなります！ */
 }
 
 /* スマホ画面（幅600px以下）のときだけの特別ルール */
 @media (max-width: 600px) {
-    body {
-        padding: 10px; /* 全体の余白を少し詰める */
-    }
-    
-    /* 英語などで溢れそうな文字を自動で改行・サイズ調整 */
-    .element-class {
-        font-size: 14px;
-        word-break: break-word; /* 長い単語でも途中で折り返す */
-    }
+  body {
+    padding: 10px;
+    word-break: break-word;
+  }
 }
