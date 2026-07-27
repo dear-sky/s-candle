@@ -376,15 +376,27 @@ input:focus,
 }
 
 /* ==========================================
-   カレンダー（Flatpickr）表示サイズの調整
+   カレンダー（Flatpickr）表示サイズの最適化
    ========================================== */
+/* カレンダー全体をコンパクトな幅・文字に固定 */
 .flatpickr-calendar {
-  font-size: 14px !important; /* カレンダー内の基準文字サイズ */
+  width: 285px !important; /* カレンダーの横幅をコンパクトに指定 */
+  font-size: 13px !important;
 }
 
-.flatpickr-calendar *,
-.flatpickr-day,
-.flatpickr-weekday,
-.flatpickr-current-month {
-  font-size: inherit !important; /* 16pxの強制上書きを解除 */
+/* 各日付マスの大きさ・文字サイズを強制指定 */
+.flatpickr-day {
+  max-width: 38px !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  font-size: 13px !important;
+}
+
+/* ヘッダー（月・曜日）の文字サイズ指定 */
+.flatpickr-current-month,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+.flatpickr-current-month input.cur-year,
+span.flatpickr-weekday {
+  font-size: 13px !important;
+  font-weight: 600 !important;
 }
