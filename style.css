@@ -1,0 +1,361 @@
+/* ==========================================
+   Dear Sky kids - Sky イベントシミュレーター スタイル
+   ========================================== */
+
+/* 全体の基本設定（ボックスサイズ指定の統一） */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: none !important;
+  background-color: #e0f2fe; /* 爽やかなスカイブルー背景 */
+  margin: 0;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1e293b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* メインコンテナ */
+.sky-simulator {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #1e293b;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
+  border: 1.5px solid #7dd3fc;
+}
+
+/* ヘッダー */
+.sim-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.brand-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #0284c7;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.sim-header-text {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #454c5c;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ダッシュボード表示部 */
+.sim-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.sim-dashboard-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.sim-stat-box {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 10px 4px;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  overflow: visible !important; /* 途切れ防止 */
+}
+
+.sim-stat-box-full {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ステータス部分（ハイライト） */
+.sim-stat-box.sim-highlight {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border: 1.5px solid #38bdf8;
+}
+
+.sim-label {
+  font-size: 10.5px;
+  color: #334155;
+  font-weight: 700;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.sim-value {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+  word-break: break-all;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px;
+  line-height: 1.2 !important;
+  overflow: visible !important; /* 途切れ防止 */
+}
+
+.sim-value-sub {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333333;
+}
+
+/* ステータス文字色（クッキリスカイブルー） */
+.sim-highlight .sim-value,
+#status-text {
+  color: #0284c7 !important;
+  font-weight: 800;
+}
+
+/* 設定エリア */
+.sim-settings {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* 日付入力グループ */
+.sim-date-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #bae6fd;
+}
+
+.sim-date-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sim-date-label label {
+  font-size: 11.5px;
+  color: #334155;
+  font-weight: 700;
+}
+
+.sim-date-label input[type="date"] {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #7dd3fc;
+  color: #1a5e8b;
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+}
+
+.sim-date-label input[type="date"]:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* 目標数入力グループ */
+.sim-target-group {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #bae6fd;
+}
+
+.sim-target-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sim-target-label label {
+  font-size: 11.5px;
+  color: #334155;
+  font-weight: 700;
+}
+
+.sim-target-label input[type="number"] {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #7dd3fc;
+  color: #0f172a;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: inherit;
+  outline: none;
+}
+
+.sim-target-label input[type="number"]:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+/* 数値入力のスピンボタン非表示 */
+.sim-target-label input[type="number"]::-webkit-outer-spin-button,
+.sim-target-label input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sim-target-label input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* トグル・チェックボックスグループ */
+.sim-toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sim-toggle {
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #417ad6;
+  user-select: none;
+}
+
+.sim-toggle input[type="checkbox"] {
+  accent-color: #0284c7;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* フッター */
+.footer-credit {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* フッターエリアのデザイン */
+.sim-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px dashed #e2e8f0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.creator-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.insta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #0284c7;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 4px 8px;
+  background-color: #f0f9ff;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.insta-link:hover {
+  background-color: #e0f2fe;
+}
+
+.insta-icon {
+  fill: currentColor;
+}
+
+.copyright-notice {
+  font-size: 0.80rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* カレンダー（Flatpickr）関連 */
+.flatpickr-day.selected, 
+.flatpickr-day.selected:hover {
+  background: #0284c7 !important;
+  border-color: #0284c7 !important;
+}
+
+.flatpickr-day.today {
+  border-color: #0284c7 !important;
+}
+
+.flatpickr-day:hover {
+  background: #e0f2fe !important;
+}
+
+input[type="date"],
+.flatpickr-input {
+  border: 1.5px solid #7dd3fc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background-color: #ffffff;
+  color: #333333;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input[type="date"]:focus,
+.flatpickr-input:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+
+/* 修正ポイント：ドット絵アイコンの配置・途切れ防止設定 */
+.pixel-icon {
+  width: 20px !important;       /* 文字サイズに対してちょうど良い大きさに自動調整 */
+  height: 20px !important;
+  object-fit: contain !important;
+  
+  /* 画像補間を無効化（ドット絵のピクセル感を維持） */
+  image-rendering: pixelated !important;
+  image-rendering: -moz-crisp-edges !important;
+  image-rendering: crisp-edges !important;
+  -ms-interpolation-mode: nearest-neighbor !important;
+  
+  display: inline-block !important;
+  vertical-align: middle !important; /* マイナス値を解消し中央に配置 */
+  margin: 0 2px !important;
+}
