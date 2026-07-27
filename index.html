@@ -14,13 +14,22 @@
 
   <!-- レイアウトおよびドット絵アイコンのスタイル調整 -->
   <style>
-    /* 【修正】iOS等のフォーカス時自動ズームを防ぐため入力欄の文字サイズを16px以上に固定 */
-    .sim-settings input[type="text"],
-    .sim-settings input[type="number"],
-    .flatpickr-input {
-      font-size: 16px !important;
-      touch-action: manipulation;
-    }
+    /* 入力欄のズーム防止（16px保持）と文字サイズ調整 */
+.sim-settings input[type="text"],
+.sim-settings input[type="number"],
+.flatpickr-input {
+  font-size: 16px !important; /* スマホの自動ズーム防止用に16pxを維持 */
+  touch-action: manipulation;
+}
+
+/* 開始日・終了日の入力文字だけを少し小さく見せる設定 */
+#input-start-date,
+#input-end-date {
+  font-size: 13px !important; /* パソコン等での表示サイズ */
+  transform: scale(0.85);      /* 見た目を約85%に縮小 */
+  transform-origin: left center; /* 左寄せで縮小 */
+  width: 118%;                /* 縮小して生じた隙間を補正 */
+}
 
     /* アイコンの途切れを解消するCSS調整 */
     .pixel-icon {
