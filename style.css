@@ -374,3 +374,17 @@ input:focus,
     word-break: break-word;
   }
 }
+
+/* ==========================================
+   カレンダー（Flatpickr）表示サイズの調整
+   ========================================== */
+.flatpickr-calendar {
+  font-size: 14px !important; /* カレンダー内の基準文字サイズ */
+}
+
+.flatpickr-calendar *,
+.flatpickr-day,
+.flatpickr-weekday,
+.flatpickr-current-month {
+  font-size: inherit !important; /* 16pxの強制上書きを解除 */
+}
