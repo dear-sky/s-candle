@@ -143,19 +143,21 @@ body {
   margin-bottom: 16px;
 }
 
-/* 日付入力グループ */
+/* 日付入力グループ（崩れ・重なり防止修正） */
 .sim-date-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 10px;
   padding-bottom: 12px;
   border-bottom: 1px solid #bae6fd;
+  width: 100%;
 }
 
 .sim-date-label {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
+  min-width: 0; /* 枠のハミ出し・重なりを確実に防ぐ */
 }
 
 .sim-date-label label {
@@ -169,12 +171,13 @@ body {
   background-color: #ffffff;
   border: 1px solid #7dd3fc;
   color: #1a5e8b;
-  padding: 8px 6px;
+  padding: 8px 4px; /* 内側パディングを微調整して文字入りやすく */
   border-radius: 8px;
   font-size: 16px !important; /* 16px固定（自動ズーム防止） */
   font-weight: 600;
   font-family: inherit;
   outline: none;
+  text-align: center;
 }
 
 .sim-date-label input:focus {
@@ -333,13 +336,13 @@ textarea,
 .flatpickr-input {
   border: 1.5px solid #7dd3fc;
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 8px 4px;
   background-color: #ffffff;
   color: #333333;
   outline: none;
   box-sizing: border-box;
   width: 100%;
-  font-size: 16px !important; /* スマホChrome等の強制自動ズーム防止（重要） */
+  font-size: 16px !important; /* スマホChrome等の強制自動ズーム防止 */
 }
 
 input:focus,
